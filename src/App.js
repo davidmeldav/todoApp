@@ -1,25 +1,41 @@
-import logo from './logo.svg';
+import React, {useEffect, useState,useCallback,useContext} from 'react'
+import {AllTasks} from './components/AllTasks'
+import FormList from './components/FormList'
+import {useTaskList} from './hooks/useUpdateList'
+import {Language} from './context'
+import {SelectedLanguage} from './components/SelectedLanguage'
+import {ChangeLanguage} from './components/ChangeLanguage'
 import './App.css';
+const initialTask=[{
+  text: "tarea 1"
+},{
+  text: "tarea 2"
+},{
+  text: "tarea 3"
+}]
+
 
 function App() {
+  const {lang,setlangAndSave}=useContext(Language)
+  const {tasks,addTasks}=useTaskList(initialTask)
+  const submitFromApp = useCallback(
+    (inputValue) => {
+        
+        addTasks(inputValue);
+    },
+    [],
+  );
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <SelectedLanguage lang={lang}/>
+      <ChangeLanguage change={setlangAndSave}/>
+     <FormList onSubmit={submitFromApp} />
+    <AllTasks  tasks={tasks}/>
     </div>
   );
 }
 
 export default App;
+
+
