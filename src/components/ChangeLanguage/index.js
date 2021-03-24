@@ -3,16 +3,15 @@ import React ,{useCallback}from 'react';
 export const SelectLanguage=({change})=> {
  
   const handleSubmit  = useCallback(
-      (e,value) => {
-          e.preventDefault();
+      (e) => {
        
-          change(value)
+          change(e.target.value)
       },
       [],
   );
   
     return (
-        <select onChange={(e)=>handleSubmit(e,e.target.value)}>
+        <select onChange={handleSubmit}>
             <option value="español" >español</option>
             <option value="inglés" >inglés</option>
         </select>

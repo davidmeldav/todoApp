@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Language from './context'
+import {LanguageProvider} from './hooks/useLanguage'
 
 ReactDOM.render(
  
-  <Language.LanguageProvider>
+  <LanguageProvider>
     <App />
-    </ Language.LanguageProvider>
+    </ LanguageProvider>
  ,
   document.getElementById('root')
 );
